@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Embed</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const embedUrl = urlParams.get('=');
+        if (embedUrl) {
+            document.write(`<iframe src="${embedUrl}" allowfullscreen></iframe>`);
+        } else {
+            document.body.innerText = "Nothing to embed";
+        }
+    </script>
+</body>
+</html>
