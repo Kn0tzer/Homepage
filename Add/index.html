@@ -21,12 +21,13 @@
 </head>
 <body>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const embedUrl = urlParams.get('=');
+        const rawQuery = window.location.search;
+        const match = rawQuery.match(/\?=(.+)/);
+        const embedUrl = match ? decodeURIComponent(match[1]) : null;
         if (embedUrl) {
             document.write(`<iframe src="${embedUrl}" allowfullscreen></iframe>`);
         } else {
-            document.body.innerText = "Nothing to embed";
+            document.body.innerText = "No URL provided to embed.";
         }
     </script>
 </body>
