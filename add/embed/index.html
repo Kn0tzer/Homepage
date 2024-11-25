@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Title can't be shown</title>
     <style>
         body, html {
             margin: 0;
@@ -23,21 +23,21 @@
     <script>
         async function fetchAndSetMetadata(embedUrl) {
             try {
-                // Fetch the page's HTML
+                // Get html
                 const response = await fetch(embedUrl);
                 const html = await response.text();
 
-                // Parse the HTML to extract metadata
+                // Get html metadata
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, "text/html");
 
-                // Update the title
+                // Title
                 const pageTitle = doc.querySelector("title");
                 if (pageTitle) {
                     document.title = pageTitle.textContent;
                 }
 
-                // Update the favicon
+                // Favicon
                 const favicon = doc.querySelector("link[rel~='icon']");
                 if (favicon) {
                     const link = document.createElement("link");
@@ -50,22 +50,17 @@
             }
         }
 
-        // Extract the raw query string
         const rawQuery = window.location.search;
-        // Match the `?=` format and extract the URL
         const match = rawQuery.match(/\?=(.+)/);
         const embedUrl = match ? decodeURIComponent(match[1]) : null;
 
         if (embedUrl) {
-            // Set the metadata
             fetchAndSetMetadata(embedUrl);
-
-            // Embed the URL in an iframe
             document.write(`<iframe src="${embedUrl}" allowfullscreen></iframe>`);
         } else {
-            // Show an alert and redirect to the base URL
             alert("No URL provided to embed.");
-            window.location.href = "https://kn0tzer.netlify.app/add";
+            const baseUrl = `${window.location.origin}/add`;
+            window.location.href = baseUrl;
         }
     </script>
 </body>
