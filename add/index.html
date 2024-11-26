@@ -118,7 +118,7 @@
                 let urlInput = document.getElementById("urlInput").value.trim();
                 if (urlInput) {
                     // If url doesn't start with https then add it
-                    if (!/^http?:\/\//i.test(urlInput)) {
+                    if (!/^https?:\/\//i.test(urlInput)) {
                         urlInput = `https://${urlInput}`;
                     }
                     window.location.href = `${baseUrl}/add/embed/?=${encodeURIComponent(urlInput)}`;
