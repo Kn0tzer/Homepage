@@ -115,14 +115,18 @@
             const baseUrl = `${window.location.origin}`;
     
             function redirectToEmbed() {
-                const urlInput = document.getElementById("urlInput").value.trim();
+                let urlInput = document.getElementById("urlInput").value.trim();
                 if (urlInput) {
+                    // If url doesn't start with https then add it
+                    if (!/^http?:\/\//i.test(urlInput)) {
+                        urlInput = `https://${urlInput}`;
+                    }
                     window.location.href = `${baseUrl}/add/embed/?=${encodeURIComponent(urlInput)}`;
                 } else {
                     alert("No URL entered");
                 }
             }
-    
+
             document.getElementById("urlInput").addEventListener("keydown", function(event) {
                 if (event.key === "Enter") {
                     redirectToEmbed();
@@ -136,7 +140,7 @@
         <h2>What is this?</h2>
         <p>
             Enter a URL into the text box above and press embed. Then, on any iOS device the website can be added to your homescreen. It will open in fullscreen as if it's an app, instead of opening Safari like normal.<br><br>
-            Some websites may say they're blocked or refused to connect. Rarely, searching something like "iframe example.com refused to connect" will give an alternate URL that works (For example google.com doesn't work but google.com/search?igpu=1 does work). Otherwise, this limitation can't be avoided no matter what. Sorry.
+            Some websites may show a blank white screen. Rarely, searching something like "iframe example.com refused to connect" will give an alternate URL that works (For example google.com doesn't work but google.com/search?igpu=1 does). Otherwise, this limitation can't be avoided no matter what. Sorry.
         </p>
 </body>
 </html>
